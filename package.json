@@ -1,0 +1,8 @@
+{
+	"name": "servicejs-packages",
+	"private": true,
+	"scripts": {},
+	"devDependencies": {
+	  "lerna": "^2.11.0"
+	}
+}
