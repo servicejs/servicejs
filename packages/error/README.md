@@ -30,9 +30,9 @@ npm install @service/error
 
 This package exports the classes `DynamicError` and `ExtendableError`.
 
-`ExtendableError` (from the [https://github.com/gfmio/ts-error](`ts-error` package)) is a base error class that can be extended to achieve custom error classes with a working inheritance hierarchy, supporting all browsers (including very old versions) and of course node.
+`ExtendableError` (from the [`ts-error`](https://github.com/gfmio/ts-error) package) is a base error class that can be extended to achieve custom error classes with a working inheritance hierarchy, supporting all browsers (including very old versions) and of course node.
 
-`DynamicError` (from the [https://github.com/gfmio/dynamic-error](`dynamic-error package`)) extends `ExtendableError` and can(re-)compute its message and stack trace dynamically when its state changes. It is useful for error messages that dynamically depend on props passed in the error constructor.
+`DynamicError` (from the [`dynamic-error`](https://github.com/gfmio/dynamic-error) package) extends `ExtendableError` and can(re-)compute its message and stack trace dynamically when its state changes. It is useful for error messages that dynamically depend on props passed in the error constructor.
 
 ```ts
 
