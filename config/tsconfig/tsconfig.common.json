@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "alwaysStrict": true,
+        "noImplicitAny": false,
+        "jsx": "react",
+        "jsxFactory": "h",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "moduleResolution": "node",
+        "lib": [
+            "dom",
+            "es5",
+            "es6",
+            "es2015",
+            "esnext"
+        ]
+    },
+    "files": [
+      "../../src/index"
+    ]
+}
