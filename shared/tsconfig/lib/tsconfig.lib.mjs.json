@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.lib.json",
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "mjs": true,
+    "allowSyntheticDefaultImports": true
+  }
+}

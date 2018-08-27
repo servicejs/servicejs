@@ -9,12 +9,17 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 
 [*.{ts,tsx,js,jsx,json}]
-indent_size = 4
 curly_bracket_next_line	= true
 spaces_around_operators = true
 spaces_around_brackets = outside
 indent_brace_style = K&R
 max_line_length = 120
+
+[*.{ts,js,json}]
+indent_size = 4
+
+[*.{tsx,jsx}]
+indent_size = 2
 
 [{package.json,.travis.yml,*.json}]
 indent_size = 2

@@ -1,6 +1,1 @@
-.esm
-.gitignore
-config
-src
-node_modules
-tests
+shared/.npmignore.tpl

@@ -1,3 +1,26 @@
 {
-    "tslint.configFile": "config/tslint/tslint.json"
+  "editor.formatOnSave": true,
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "tslint.autoFixOnSave": true,
+  "tslint.configFile": "shared/tslint/tslint.json",
+  "coverage-gutters.lcovname": "**/lcov.info",
+  "files.exclude": {
+    "**/.prettierrc.toml": true,
+    "**/.yarnrc": true,
+    "**/yarn*": true,
+    "**/node_modules": true,
+    "**/lerna.json": true,
+    "**/.nyc_output": true,
+    "**/coverage": true,
+    "packages/**/lib": true,
+    "packages/**/*.js": true,
+    "packages/**/*.mjs": true,
+    "packages/**/*.d.ts": true,
+    "packages/**/*.map": true,
+    "packages/**/.gitignore": true,
+    "packages/**/.npmignore": true,
+    "packages/**/shared": true,
+    "packages/**/tsconfig*": true,
+    "packages/**/test/mocha.opts": true
+  }
 }

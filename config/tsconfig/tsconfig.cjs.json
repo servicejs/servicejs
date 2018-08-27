@@ -1,9 +1,0 @@
-{
-    "extends": "./tsconfig.lib.json",
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es3",
-        "outDir": "../../lib",
-        "esModuleInterop": true
-    }
-}

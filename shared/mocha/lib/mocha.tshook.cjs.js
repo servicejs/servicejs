@@ -3,5 +3,5 @@
  */
 
 require("ts-node").register({
-  project: "./config/tsconfig/tsconfig.cjs.json",
+    project: "shared/tsconfig/lib/tsconfig.lib.cjs.json",
 });

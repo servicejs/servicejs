@@ -1,3 +1,5 @@
+lib
+
 # Created by https://www.gitignore.io/api/node,macos,linux,windows
 
 ### Linux ###

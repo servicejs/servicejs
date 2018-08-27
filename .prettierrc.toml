@@ -1,0 +1,60 @@
+insertPragma = false
+printWidth = 80
+requirePragma = false
+tabWidth = 4
+proseWrap = true
+
+# JavaScript-like language settings
+
+[[overrides]]
+files = ["*.ts", "*.tsx", "*.js", "*.jsx", "*.mjs"]
+[overrides.options]
+arrowParens = "always"
+bracketSpacing = true
+jsxBracketSameLine = false
+printWidth = 120
+proseWrap = "always"
+semi = true
+singleQuote = false
+trailingComma = "all"
+
+# Parsers
+
+[[overrides]]
+files = ["*.ts", "*.tsx"]
+[overrides.options]
+parser = "typescript"
+
+[[overrides]]
+files = ["*.js", "*.jsx", "*.mjs"]
+[overrides.options]
+parser = "babylon"
+
+[[overrides]]
+files = "*.json"
+[overrides.options]
+parser = "json"
+
+[[overrides]]
+files = "*.md"
+[overrides.options]
+parser = "markdown"
+
+[[overrides]]
+files = ["*.yml", "*.yaml"]
+[overrides.options]
+parser = "yaml"
+
+# Tab width
+
+# 4 spaces
+[[overrides]]
+files = ["*.ts", "*.js"]
+[overrides.options]
+tabWidth = 4
+
+# 2 spaces
+[[overrides]]
+files = ["*.tsx", "*.jsx", "*.json", "*.yaml", "*.yml"]
+[overrides.options]
+tabWidth = 2

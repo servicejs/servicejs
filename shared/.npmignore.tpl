@@ -1,0 +1,10 @@
+.gitignore
+.npmignore
+node_modules
+src
+test
+yarn.lock
+*.map
+*.tgz
+.nyc_output
+coverage

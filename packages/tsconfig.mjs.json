@@ -1,0 +1,7 @@
+{
+  "compilerOptions": { "composite": true },
+  "files": [],
+  "references": [
+    { "path": "error/tsconfig.mjs.json" }
+  ]
+}

@@ -3,8 +3,9 @@
  */
 
 require("ts-node").register({
-    project: "./config/tsconfig/tsconfig.mjs.json",
+    compiler: "ts-mjs",
+    project: "shared/tsconfig/lib/tsconfig.lib.mjs.json",
     compilerOptions: {
-        "module": "commonjs",
+        module: "commonjs",
     },
 });

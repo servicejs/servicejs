@@ -1,0 +1,5 @@
+--require source-map-support/register
+--full-trace
+--bail
+--recursive
+test/**/*.{ts,tsx}

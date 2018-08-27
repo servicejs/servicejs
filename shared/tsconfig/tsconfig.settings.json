@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "composite": true,
+
+    "target": "esnext",
+    "module": "esnext",
+
+    "moduleResolution": "node",
+
+    "alwaysStrict": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "preserveWatchOutput": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true,
+
+    "lib": ["esnext"],
+
+    "jsx": "preserve"
+  }
+}
