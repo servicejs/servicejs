@@ -17,7 +17,7 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
 
-    "lib": ["esnext"],
+    "lib": ["esnext", "dom"],
 
     "jsx": "preserve"
   }
