@@ -1,0 +1,77 @@
+{
+    "name": "@service/core",
+    "version": "0.1.0",
+    "description": "service.js core library",
+    "author": "Automorph Ltd (https://www.automorph.com)",
+    "license": "MIT",
+    "private": false,
+    "main": "lib/index",
+    "types": "lib/index.d.ts",
+    "browser": "lib/index.js",
+    "module": "lib/index.mjs",
+    "scripts": {
+      "compile:cjs": "tsc -p shared/tsconfig/lib/tsconfig.lib.cjs.json",
+      "compile:cjs:watch": "tsc -p shared/tsconfig/lib/tsconfig.lib.cjs.json -w",
+      "compile:mjs": "tsc-mjs -p shared/tsconfig/lib/tsconfig.lib.mjs.json",
+      "compile:mjs:watch": "tsc-mjs shared/tsconfig/lib/tsconfig.lib.mjs.json -w",
+      "compile": "npm-run-all compile:cjs compile:mjs",
+      "compile:watch": "npm-run-all compile:cjs:watch compile:mjs:watch",
+      "watch": "npm-run-all compile:watch",
+      "clean:lib": "rimraf lib",
+      "clean": "npm-run-all clean:lib",
+      "lint": "tslint -c shared/tslint/tslint.json -p shared/tsconfig/tsconfig.settings.json",
+      "prettier": "pretty-quick --staged",
+      "prebuild": "npm run clean:lib",
+      "prepare": "npm run build",
+      "pretest": "npm-run-all prettier lint build",
+      "build": "npm-run-all compile",
+      "test:cjs": "nyc mocha --require shared/mocha/lib/mocha.tshook.cjs.js",
+      "test:cjs:watch": "nyc mocha --require shared/mocha/lib/mocha.tshook.cjs.js --watch --watch-extensions js,ts,tsx",
+      "test:mjs": "nyc mocha --require shared/mocha/lib/mocha.tshook.mjs.js",
+      "test:mjs:watch": "nyc mocha --require shared/mocha/lib/mocha.tshook.mjs.js --watch --watch-extensions js,ts,tsx",
+      "test": "npm-run-all test:cjs test:mjs",
+      "test:watch": "npm-run-all -p test:cjs:watch test:mjs:watch",
+      "test:report": "nyc report"
+    },
+    "publishConfig": {
+      "access": "public"
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/servicejs/servicejs.git"
+    },
+    "bugs": {
+      "url": "https://github.com/servicejs/servicejs/issues"
+    },
+    "homepage": "https://github.com/servicejs/servicejs#readme",
+    "nyc": {
+      "include": [
+        "test/**/*.ts",
+        "test/**/*.tsx",
+        "src/**/*.ts",
+        "src/**/*.tsx"
+      ],
+      "extension": [
+        ".ts",
+        ".tsx"
+      ],
+      "reporter": [
+        "text-summary",
+        "html",
+        "lcov"
+      ],
+      "temp-directory": ".nyc_output",
+      "report-dir": "./coverage",
+      "check-coverage": true,
+      "per-file": true,
+      "lines": 99,
+      "statements": 99,
+      "functions": 99,
+      "branches": 99,
+      "cache": true,
+      "all": true,
+      "sourceMap": true,
+      "instrument": true
+    }
+  }
+  

@@ -1,5 +1,4 @@
 {
-  "name": "servicejs-packages",
   "private": true,
   "scripts": {
     "compile:cjs": "tsc -b -v --force ./tsconfig.cjs.debug.json",
@@ -16,5 +15,7 @@
     "ts-mjs": "^3.1.0",
     "typescript": "^3.0.1"
   },
-  "workspaces": ["packages/*"]
+  "workspaces": [
+    "packages/*"
+  ]
 }
