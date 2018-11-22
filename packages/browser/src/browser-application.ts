@@ -2,14 +2,20 @@
  * BrowserApplication class
  */
 
-import { Application, ApplicationState } from "@service/core";
+import {
+  Application,
+  ApplicationState,
+  Serializable,
+  Unserializable,
+} from "@service/core";
+import { persistObjectToStorage, restoreObjectFromStorage } from "./storage";
 
 export abstract class BrowserApplication<
   P = {},
-  S extends ApplicationState = ApplicationState
-> extends Application<P, S> {
-  protected storageKey: string = "app";
-
+  S extends ApplicationState = ApplicationState,
+  Serialized = {}
+> extends Application<P, S>
+  implements Serializable<Serialized>, Unserializable<Serialized> {
   protected on: {
     beforeUnload?: (event: Event) => string | null | void;
   } = {
@@ -18,10 +24,19 @@ export abstract class BrowserApplication<
     },
   };
 
+  public serialize(): Serialized {
+    return {} as Serialized;
+  }
+
+  public unserialize(value: Serialized) {
+    return;
+  }
+
   protected init() {
     if (this.on.beforeUnload) {
       window.addEventListener("beforeunload", this.on.beforeUnload);
     }
+    this.restoreFromStorage();
   }
 
   protected async nextAction() {
@@ -32,53 +47,22 @@ export abstract class BrowserApplication<
     return super.nextAction();
   }
 
-  protected saveStateToStorage() {
-    try {
-      sessionStorage.setItem(this.storageKey, JSON.stringify(this.state));
-    } catch (e) {
-      try {
-        localStorage.setItem(this.storageKey, JSON.stringify(this.state));
-      } catch (e) {
-        return false;
-        // Intentionally blank
-      }
-    }
-    return true;
-  }
-
-  protected loadStateFromStorage() {
-    let storedItem: string | null = null;
-    try {
-      storedItem = sessionStorage.getItem(this.storageKey);
-    } catch (e) {
-      try {
-        storedItem = localStorage.getItem(this.storageKey);
-      } catch (e) {
-        // Intentionally blank
-      }
-    }
-
-    if (storedItem) {
-      try {
-        return JSON.parse(storedItem) as S;
-      } catch (e) {
-        // tslint:disable-next-line:no-console
-        console.error(e);
-      }
-    }
-  }
-
   protected terminate() {
-    this.saveStateToStorage();
+    this.persistToStorage();
     this.state.state = "terminated";
     return this.nextAction();
   }
 
-  protected computeInitialStateFromProps(props: P) {
-    const state = this.loadStateFromStorage();
-    if (state) {
-      return state;
+  protected persistToStorage(key: string = "app") {
+    return persistObjectToStorage(key, this.serialize());
+  }
+
+  protected restoreFromStorage(key: string = "app") {
+    const storedValue: Serialized | null | undefined = restoreObjectFromStorage(
+      key,
+    );
+    if (typeof storedValue !== "undefined" && storedValue !== null) {
+      this.unserialize(storedValue);
     }
-    return super.computeInitialStateFromProps(props);
   }
 }
