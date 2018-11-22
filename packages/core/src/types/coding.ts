@@ -1,33 +1,13 @@
-import { IClass } from "./function";
+/**
+ * Encoding & decoding types
+ */
 
-export interface Encodable<T extends object> {
-  encode(): T;
+export interface Encoder<R, T = any> {
+  encode(value: T): R;
 }
 
-export interface Decodable extends IClass<any, any> {
-  initFromDecoded<T>(decodedData: T): InstanceType<this>;
+export interface Decoder<R, T = any> {
+  decode(representation: R): T;
 }
 
-export interface Encoder<E> {
-  encode<T extends object>(value: Encodable<T>): E;
-}
-
-export interface Decoder<E> {
-  decode<T extends object>(encodedValue: E): T;
-}
-
-export interface Coder<E> extends Encoder<E>, Decoder<E> {}
-
-export class JSONEncoder implements Coder<string> {
-  public encode(value: Encodable<any>): string {
-    if (typeof value === "object") {
-      return value.encode();
-    } else {
-      return JSON.stringify(value);
-    }
-  }
-
-  public decode(encodedValue: string) {
-    return JSON.parse(encodedValue);
-  }
-}
+export type Coder<R, T = any> = Encoder<R, T> & Decoder<R, T>;
