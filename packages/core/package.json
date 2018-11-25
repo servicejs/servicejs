@@ -1,6 +1,6 @@
 {
   "name": "@service/core",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "service.js core library",
   "author": "Automorph Ltd (https://www.automorph.com)",
   "license": "MIT",
