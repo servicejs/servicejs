@@ -2,8 +2,7 @@
  * Equality & equivalence test functions
  */
 
-import { isUndefined } from "../../lib";
-import { isNull, isObject } from "./is";
+import { isNull, isObject, isUndefined } from "./is";
 import { not } from "./predicates";
 
 export type EqualityComparator<T, U> = (value1: T, value2: U) => boolean;
@@ -107,7 +106,7 @@ export const shallowStructurallyTypeEqualNonNullObjectComparator = <T, U>(
 
   const keys = Object.keys(value1);
   for (const key of keys) {
-    if (not(typeEqual(value1[key], value2[key]))) {
+    if (not(typeEqual((value1 as any)[key], (value2 as any)[key]))) {
       return false;
     }
   }
@@ -137,8 +136,8 @@ export const deepStructurallyEqualNonNullObjectComparator = <T, U>(
 
   const keys = Object.keys(value1);
   for (const key of keys) {
-    const prop1 = value1[key];
-    const prop2 = value2[key];
+    const prop1 = (value1 as any)[key];
+    const prop2 = (value2 as any)[key];
     const prop1Type = typeof prop1;
     if (prop1Type === "object" && not(deepStructurallyEqual(prop1, prop2))) {
       return false;
@@ -174,7 +173,7 @@ export function structurallyAndValueEqual<T, U>(
   }
   const keys = Object.keys(value1);
   for (const key of keys) {
-    if (not(comparator(value1[key], value2[key]))) {
+    if (not(comparator((value1 as any)[key], (value2 as any)[key]))) {
       return false;
     }
   }
@@ -236,4 +235,4 @@ export const propertyEquivalenceCheckerFactory = <
     : <T1 extends { [key in Prop1]: T }, T2 extends { [key in Prop2]: T }>(
         value1: T1,
         value2: T2,
-      ) => equivalenceChecker(value1[prop1], value2[prop2]);
+      ) => equivalenceChecker(value1[prop1], value2[prop2!]);
