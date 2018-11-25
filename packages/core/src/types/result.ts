@@ -107,11 +107,11 @@ export class BinaryResult<
     return new this<ResultMap, FailureResultType>("failure", failureValue);
   }
 
-  public isSuccess(): this is BinaryResult<ResultMap, SuccessResultType> {
+  public isSuccess(): this is IBinarySuccessResult<ResultMap> {
     return this.type() === "success";
   }
 
-  public isFailure(): this is BinaryResult<ResultMap, FailureResultType> {
+  public isFailure(): this is IBinaryFailureResult<ResultMap> {
     return this.type() === "failure";
   }
 
@@ -168,7 +168,7 @@ export interface ITernaryErrorResult<
 export class TernaryResult<
   ResultMap extends ITernaryResultMap<any, any, any>,
   ResultType extends keyof ResultMap
-> extends BinaryResult<ResultMap, ResultType>
+> extends Result<ResultMap, ResultType>
   implements ITernaryResult<ResultMap, ResultType> {
   public static success<ResultMap extends ITernaryResultMap<any, any, any>>(
     successValue: SuccessType<ResultMap>,
@@ -186,16 +186,24 @@ export class TernaryResult<
     return new this<ResultMap, ErrorResultType>("error", errorValue);
   }
 
-  public isSuccess(): this is TernaryResult<ResultMap, SuccessResultType> {
+  public isSuccess(): this is ITernarySuccessResult<ResultMap> {
     return this.type() === "success";
   }
 
-  public isFailure(): this is TernaryResult<ResultMap, FailureResultType> {
+  public isFailure(): this is ITernaryFailureResult<ResultMap> {
     return this.type() === "failure";
   }
 
-  public isError(): this is TernaryResult<ResultMap, ErrorResultType> {
+  public isError(): this is ITernaryErrorResult<ResultMap> {
     return this.type() === "error";
+  }
+
+  public ifSuccess(action: (value: SuccessType<ResultMap>) => any): this {
+    return this.if("success", action);
+  }
+
+  public ifFailure(action: (value: FailureType<ResultMap>) => any): this {
+    return this.if("failure", action);
   }
 
   public ifError(action: (value: ErrorType<ResultMap>) => any): this {
