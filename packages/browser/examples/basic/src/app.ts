@@ -2,7 +2,7 @@
  * Basic example Browser application
  */
 
-import { BrowserApplication } from "../../../lib";
+import { BrowserApplication } from "../../../src";
 
 export class App extends BrowserApplication {
   protected async main() {
