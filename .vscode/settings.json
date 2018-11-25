@@ -6,12 +6,12 @@
   "coverage-gutters.lcovname": "**/lcov.info",
   "files.exclude": {
     "**/.prettierrc.toml": false,
-    "**/.yarnrc": true,
-    "**/yarn*": true,
+    "**/.yarnrc": false,
+    "**/yarn*": false,
     "**/node_modules": false,
-    "**/lerna.json": true,
-    "**/.nyc_output": true,
-    "**/coverage": true,
+    "**/lerna.json": false,
+    "**/.nyc_output": false,
+    "**/coverage": false,
     "packages/**/lib": false,
     "packages/**/*.js": false,
     "packages/**/*.mjs": false,
@@ -19,8 +19,8 @@
     "packages/**/*.map": false,
     "packages/**/.gitignore": false,
     "packages/**/.npmignore": false,
-    "packages/**/shared": true,
-    "packages/**/tsconfig*": true,
-    "packages/**/test/mocha.opts": true
+    "packages/**/shared": false,
+    "packages/**/tsconfig*": false,
+    "packages/**/test/mocha.opts": false
   }
 }
