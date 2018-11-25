@@ -22,10 +22,9 @@ export abstract class Application<
     return instance.nextAction();
   }
 
-  public static new<
-    P = {},
-    S extends ApplicationState = ApplicationState
-  >(props: P = {} as P) {
+  public static new<P = {}, S extends ApplicationState = ApplicationState>(
+    props: P = {} as P,
+  ) {
     if (this.instance !== undefined) {
       return this.instance;
     }
@@ -40,7 +39,7 @@ export abstract class Application<
     super(props);
   }
 
-  protected async nextAction(): Promise<void> {
+  protected async nextAction(): Promise<any> {
     switch (this.state.state) {
       case "new":
         this.state.state = "running";
@@ -57,7 +56,7 @@ export abstract class Application<
     }
   }
 
-  protected abstract async main(): Promise<void>;
+  protected abstract async main(): Promise<any>;
 
   protected computeInitialStateFromProps(props: P): S {
     return {

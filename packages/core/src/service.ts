@@ -17,7 +17,7 @@ export class Service<P, S> {
     this.state = initialState || this.computeInitialStateFromProps(props);
   }
 
-  protected async nextAction() {
+  protected async nextAction(): Promise<any> {
     // Intentionally blank
   }
 

@@ -72,5 +72,8 @@
     "all": true,
     "sourceMap": true,
     "instrument": true
+  },
+  "dependencies": {
+    "eventemitter3": "^3.1.0"
   }
 }
