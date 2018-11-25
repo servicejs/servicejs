@@ -157,7 +157,7 @@ export class EnvVarMap<ValueMap extends object> {
     const o: ValueMap = {} as ValueMap;
     const keys: Array<keyof ValueMap> = Object.keys(this.map) as any[];
     for (const key of keys) {
-      o[key] = this.map[key].get();
+      o[key] = this.map[key].get() as any;
     }
     return o;
   }

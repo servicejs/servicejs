@@ -29,12 +29,12 @@ export abstract class NodeApplication<
       this.terminate(1);
     },
 
-    SIGINT: (signal: "SIGINT") => {
+    SIGINT: (signal) => {
       // tslint:disable-next-line:no-console
       console.log(`${signal} received. Terminating.`);
       this.terminate();
     },
-    SIGTERM: (signal: "SIGTERM") => {
+    SIGTERM: (signal) => {
       // tslint:disable-next-line:no-console
       console.log(`${signal} received. Terminating.`);
       this.terminate();
