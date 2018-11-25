@@ -1,0 +1,14 @@
+{
+  "name": "@service/node-example-basic",
+  "version": "1.0.0",
+  "description": "Basic example of using @service/node",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "watch": "ts-node -O '{ \"target\": \"esnext\" }' ./src/entrypoint.ts"
+  },
+  "devDependencies": {
+    "ts-node": "^7.0.1"
+  }
+}
