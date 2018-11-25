@@ -1,6 +1,6 @@
 {
   "name": "@service/browser",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "service.js browser library",
   "author": "Automorph Ltd (https://www.automorph.com)",
   "license": "MIT",
@@ -74,6 +74,6 @@
     "instrument": true
   },
   "dependencies": {
-    "@service/core": "^0.1.4"
+    "@service/core": "^0.1.8"
   }
 }
