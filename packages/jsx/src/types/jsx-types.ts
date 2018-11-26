@@ -5,16 +5,11 @@
 // tslint:disable:no-empty-interface
 // tslint:disable:interface-name
 
-/** Imports */
+import { Component } from "./element";
 
-import { ComponentType } from "./element";
-
-/** Declarations */
-
-/**
- * Class components must create instances that conform to ElementClass
- */
-export interface ElementClass extends ComponentType {}
+export interface ElementClass extends Component {
+  render: any;
+}
 
 // /**
 //  * ElementAttributesProperty should contain a single property name, at which
@@ -22,7 +17,7 @@ export interface ElementClass extends ComponentType {}
 //  * provided, the first element of the constructor will be used.
 //  */
 // export interface ElementAttributesProperty {
-//   props;
+//   props: {};
 // }
 
 /**
@@ -30,7 +25,7 @@ export interface ElementClass extends ComponentType {}
  * attribute.
  */
 export interface ElementChildrenAttribute {
-  children;
+  children: {};
 }
 
 /**
@@ -49,3 +44,22 @@ export interface IntrinsicClassAttributes<T> {}
  * (TODO: How?)
  */
 export interface LibraryManagedAttributes {}
+
+//
+// Children helper types
+//
+
+/**
+ * A helper interface for props with a children attributes. `C` can be any
+ * tuple type.
+ */
+export interface ChildrenProps<C> {
+  children?: C;
+}
+
+/**
+ * A helper type for extracting the concrete children type from ChildrenProps
+ */
+export type ChildrenType<
+  P extends ChildrenProps<any>
+> = P extends ChildrenProps<infer C> ? (C extends any[] ? C : [C]) : [];
