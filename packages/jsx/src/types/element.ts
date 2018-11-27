@@ -82,10 +82,25 @@ export function evalElement<C extends ComponentElement<any>>(element: C): Instan
 // prettier-ignore
 export function evalElement(element: JsxElement<any>): any;
 export function evalElement(element: JsxElement<any>) {
+  const propsTypeIsUndefined = typeof element.props === "undefined";
+  const elementType = typeof element.type;
+  const elementTypeIsString = elementType === "string";
+  const elementTypeIsFunction = elementType === "function";
+  const elementTypeIsNeitherStringOrFunction =
+    !elementTypeIsString && !elementTypeIsFunction;
+
+  if (propsTypeIsUndefined || elementTypeIsNeitherStringOrFunction) {
+    return element;
+  }
+
+  if ("children" in element.props) {
+    element.props.children = element.props.children.map(evalElement);
+  }
   // Intrinsic
   if (typeof element.type === "string") {
     return element.type;
   }
+
   // Class component
   if (
     element.type &&

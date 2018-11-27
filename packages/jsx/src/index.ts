@@ -2,5 +2,5 @@
  * @service/jsx entrypoint
  */
 
-export * from "./h";
+export { default, h } from "./h";
 export * from "./types";
