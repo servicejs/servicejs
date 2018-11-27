@@ -45,6 +45,9 @@ export abstract class NodeApplication<
     // Initialize all NodeJS event handlers to conditionally use the handlers
     // in `onRuntimeEvent`, if they are set
     for (const event of nodeJSProcessEvents) {
+      if (["SIGKILL", "SIGSTOP"].indexOf(event) > -1) {
+        break;
+      }
       process.on(event as any, (...args: any[]) => {
         const handler: any = this.onRuntimeEvent[event];
         if (handler) {
@@ -52,6 +55,14 @@ export abstract class NodeApplication<
         }
       });
     }
+  }
+
+  protected async nextAction() {
+    if (this.state.state === "new") {
+      this.init();
+    }
+
+    return super.nextAction();
   }
 
   protected async terminate(code?: number) {

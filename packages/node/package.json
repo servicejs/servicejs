@@ -74,7 +74,7 @@
     "instrument": true
   },
   "dependencies": {
-    "@service/core": "^0.1.8"
+    "@service/core": "^0.1.9"
   },
   "devDependencies": {
     "@types/node": "^10.12.10"
