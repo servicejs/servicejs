@@ -95,5 +95,13 @@ export function evalElement(element: JsxElement<any>) {
     return new (element.type as any)(element.props);
   }
   // Functional component
-  return evalElement((element.type as any)(element.props));
+  const result = (element.type as any)(element.props);
+
+  // Regular Functional component
+  if ("type" in result && "props" in result) {
+    return evalElement(result);
+  }
+
+  // Factory function
+  return result;
 }
