@@ -1,7 +1,7 @@
 {
-  "name": "@service/jsx",
-  "version": "0.1.4",
-  "description": "service.js jsx library",
+  "name": "@service/electron",
+  "version": "0.1.0",
+  "description": "service.js electron library",
   "author": "Automorph Ltd (https://www.automorph.com)",
   "license": "MIT",
   "private": false,
@@ -9,33 +9,13 @@
   "types": "lib/index.d.ts",
   "browser": "lib/index.js",
   "module": "lib/index.mjs",
-  "dependencies": {
-    "@service/core": "^0.1.9"
-  },
-  "devDependencies": {
-    "@types/chai": "^4.1.4",
-    "@types/mocha": "^5.2.5",
-    "chai": "^4.1.2",
-    "mocha": "^5.2.0",
-    "npm-run-all": "^4.1.3",
-    "nyc": "^12.0.2",
-    "prettier": "^1.14.2",
-    "pretty-quick": "^1.6.0",
-    "rimraf": "^2.6.2",
-    "source-map-support": "^0.5.9",
-    "ts-mjs": "^3.1.0",
-    "ts-node": "^7.0.1",
-    "tslint": "^5.11.0",
-    "typedoc": "^0.12.0",
-    "typescript": "^3.0.1"
-  },
   "scripts": {
     "compile:cjs": "tsc -p shared/tsconfig/lib/tsconfig.lib.cjs.json",
     "compile:cjs:watch": "tsc -p shared/tsconfig/lib/tsconfig.lib.cjs.json -w",
     "compile:mjs": "tsc-mjs -p shared/tsconfig/lib/tsconfig.lib.mjs.json",
     "compile:mjs:watch": "tsc-mjs shared/tsconfig/lib/tsconfig.lib.mjs.json -w",
     "compile": "npm-run-all compile:cjs compile:mjs",
-    "compile:watch": "npm-run-all -p compile:cjs:watch compile:mjs:watch",
+    "compile:watch": "npm-run-all compile:cjs:watch compile:mjs:watch",
     "watch": "npm-run-all compile:watch",
     "clean:lib": "rimraf lib",
     "clean": "npm-run-all clean:lib",
@@ -92,5 +72,12 @@
     "all": true,
     "sourceMap": true,
     "instrument": true
+  },
+  "dependencies": {
+    "@service/browser": "^0.1.5",
+    "@service/core": "^0.1.9",
+    "@service/jsx": "^0.1.4",
+    "@service/node": "^0.1.1",
+    "electron": "^3.0.10"
   }
 }
