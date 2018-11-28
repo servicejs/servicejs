@@ -1,7 +1,7 @@
 /* @jsx h */
 
 import { h, Props } from "@service/jsx";
-import { MenuItemConstructorOptions } from "electron";
+import { Menu as ElectronMenu, MenuItem as ElectronMenuItem, MenuItemConstructorOptions } from "electron";
 
 export interface MenuProps {
   children?: any[];
@@ -33,3 +33,11 @@ export type ClickMenuItemProps = Pick<MenuItemProps, "enabled" | "accelerator" |
 export const ClickMenuItemFactory = (emitter: (id: string) => void) => (props: ClickMenuItemProps) => (
   <MenuItem {...props} click={() => emitter(props.id)} />
 );
+
+export const getMenuItemById = (id: string): ElectronMenuItem | null | undefined => {
+  const menu = ElectronMenu.getApplicationMenu();
+  if (!menu) {
+    return null;
+  }
+  return menu!.getMenuItemById(id);
+};

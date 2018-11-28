@@ -16,8 +16,11 @@ class MainApp extends MainProcessElectronApplication {
   protected emitter = MenuItemIpcProtocol.Main.Emitter(() => this.mainWindow());
 
   protected async main() {
+    // tslint:disable-next-line:no-console
     console.log("Hello World");
-    return new Promise<void>((resolve, reject) => {});
+    return new Promise<never>((resolve, reject) => {
+      /* Purposefully empty */
+    });
   }
 
   protected menu() {
