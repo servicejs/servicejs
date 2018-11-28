@@ -54,11 +54,10 @@ export interface FunctionComponentElement<P> extends JsxElement<P> {
 //
 
 export class Component<P> {
+  protected readonly props: P;
   /** @internal */
   // tslint:disable-next-line:variable-name
-  private static readonly __isClass = Object.freeze({});
-
-  protected readonly props: P;
+  private readonly __isClass = Object.freeze({});
 
   constructor(props: P) {
     this.props = props;
@@ -86,6 +85,19 @@ export type ComponentClassPropsType<
 /** A class element contains the class to be constructed and the props to be used */
 export interface ComponentElement<P> extends JsxElement<P> {
   type: ComponentClass<P>;
+}
+
+//
+// Props component
+//
+
+// tslint:disable-next-line:max-classes-per-file
+export class Props<P> extends Component<P> {
+  public readonly props: P;
+  constructor(props: P) {
+    super(props);
+    this.props = props;
+  }
 }
 
 //
