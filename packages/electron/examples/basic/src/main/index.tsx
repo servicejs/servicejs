@@ -1,6 +1,6 @@
 /* @jsx h */
 
-import { evalElement, h } from "@service/jsx";
+import { evalElement as e, h } from "@service/jsx";
 import { MenuItemConstructorOptions } from "electron";
 import {
   ClickMenuItemFactory,
@@ -22,7 +22,7 @@ class MainApp extends MainProcessElectronApplication {
 
   protected menu() {
     const ClickMenuItem = ClickMenuItemFactory(this.emitter.menuItemClick);
-    return evalElement(
+    return e(
       <Menu>
         <SubMenu label="Test menu">
           <ClickMenuItem label="Test item 1" id="test-item" />
@@ -30,7 +30,7 @@ class MainApp extends MainProcessElectronApplication {
           <MenuItem label="Test item 2" />
         </SubMenu>
       </Menu>,
-    ) as MenuItemConstructorOptions[];
+    ).props.children as MenuItemConstructorOptions[];
   }
 }
 
