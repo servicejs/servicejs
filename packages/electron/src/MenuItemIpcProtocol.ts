@@ -6,6 +6,7 @@
 
 import { BrowserWindow, MenuItem } from "electron";
 import {
+  IpcEmitterMap,
   IpcListenerMap,
   listenToChannelsInMain,
   listenToChannelsInRenderer,
@@ -45,7 +46,7 @@ export namespace MenuItemIpcProtocol {
     ) => listenToChannelsInMain<ListenerArgMap<MenuItemIds>>(listenerMap);
     export const Emitter = <MenuItemIds extends string>(
       browserWindow: () => BrowserWindow,
-    ) =>
+    ): IpcEmitterMap<EmitterArgMap<MenuItemIds>> =>
       MainIpcEmitter<EmitterArgMap<MenuItemIds>>(browserWindow, [
         "menuItemClick",
       ]);
@@ -60,8 +61,9 @@ export namespace MenuItemIpcProtocol {
     export const listen = <MenuItemIds extends string>(
       listenerMap: IpcListenerMap<ListenerArgMap<MenuItemIds>>,
     ) => listenToChannelsInRenderer<ListenerArgMap<MenuItemIds>>(listenerMap);
-    export const Emitter = <MenuItemIds extends string>() =>
-      RendererIpcEmitter<EmitterArgMap<MenuItemIds>>(["updateMenuItems"]);
+    export const Emitter = <MenuItemIds extends string>(): IpcEmitterMap<
+      EmitterArgMap<MenuItemIds>
+    > => RendererIpcEmitter<EmitterArgMap<MenuItemIds>>(["updateMenuItems"]);
   }
 }
 
