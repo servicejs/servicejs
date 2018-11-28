@@ -5,13 +5,14 @@
 /* @jsx h */
 // tslint:disable:no-console
 
-import { ElementClass, evalElement, h } from "../src";
+import { Component, ElementClass, evalElement, h, IntrinsicElements } from "../src";
 
 const jsx1 = <foo bar={true} />;
 console.log(jsx1);
 
-class C implements ElementClass {
+class C extends Component<{ foo: number }> {
   constructor(props: { foo: number }) {
+    super(props);
     console.log(props);
   }
   public render() {}

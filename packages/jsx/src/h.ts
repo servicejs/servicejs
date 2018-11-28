@@ -46,7 +46,7 @@ export function h<P>(
   }
 
   if ("children" in props) {
-    (props as any).children = flatten((props as any).children);
+    (props as any).children = flatten((props as any).children).filter(Boolean);
   }
 
   return { type, props };
@@ -61,7 +61,7 @@ export namespace h {
     /**
      * Class components must create instances that conform to ElementClass
      */
-    export interface ElementClass extends Types.Component {}
+    export interface ElementClass extends Types.ElementClass {}
     // export interface ElementAttributesProperty extends Types.ElementAttributesProperty {}
     // export interface ElementChildrenAttribute extends Types.ElementChildrenAttribute {}
     export interface IntrinsicAttributes extends Types.IntrinsicAttributes {}

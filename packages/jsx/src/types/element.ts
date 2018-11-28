@@ -53,11 +53,30 @@ export interface FunctionComponentElement<P> extends JsxElement<P> {
 // ComponentClass / ClassElement
 //
 
-export interface Component {}
+export class Component<P> {
+  /** @internal */
+  // tslint:disable-next-line:variable-name
+  private static readonly __isClass = Object.freeze({});
+
+  protected readonly props: P;
+
+  constructor(props: P) {
+    this.props = props;
+  }
+}
+Object.freeze(Component);
+
+export const shouldConstruct = (componentType: any) => {
+  const prototype = componentType.prototype;
+  return !!(prototype && prototype.__isClass);
+};
+
+export const isFunctionComponent = (componentType: any) =>
+  typeof componentType === "function" && !shouldConstruct(componentType);
 
 /** A component class is a class / a function you can with new that returns a ElementClass value */
 export interface ComponentClass<P> {
-  new (props: P): Component;
+  new (props: P): Component<P> & InstanceType<this>;
 }
 
 export type ComponentClassPropsType<
@@ -101,22 +120,13 @@ export function evalElement(element: JsxElement<any>) {
     return element.type;
   }
 
-  // Class component
-  if (
-    element.type &&
-    element.type.prototype &&
-    element.type.prototype.constructor === element.type
-  ) {
-    return new (element.type as any)(element.props);
-  }
-  // Functional component
-  const result = (element.type as any)(element.props);
-
-  // Regular Functional component
-  if ("type" in result && "props" in result) {
+  // Function component
+  if (isFunctionComponent(elementType)) {
+    // Functional component
+    const result = (element.type as any)(element.props);
     return evalElement(result);
   }
 
-  // Factory function
-  return result;
+  // Class component
+  return new (element.type as any)(element.props);
 }

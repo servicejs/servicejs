@@ -7,7 +7,7 @@
 
 import { Component } from "./element";
 
-export interface ElementClass extends Component {}
+export interface ElementClass extends Component<any> {}
 
 // /**
 //  * ElementAttributesProperty should contain a single property name, at which
