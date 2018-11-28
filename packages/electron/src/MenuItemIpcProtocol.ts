@@ -110,8 +110,6 @@ export const dispatchActionById = <ActionIds extends string | number | symbol>(
     [Id in ActionIds]?: (() => void) | ((id: Id) => void) | undefined
   },
 ) => <Id extends ActionIds>(id: Id) => {
-  // tslint:disable-next-line:no-console
-  console.log(id);
   const handler = handlerMap[id];
 
   // If no handler corrsponding to the ID exists, do nothing
