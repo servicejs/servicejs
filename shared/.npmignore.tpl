@@ -1,5 +1,6 @@
 .gitignore
 .npmignore
+examples
 node_modules
 src
 test
