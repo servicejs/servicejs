@@ -55,19 +55,24 @@ export interface FunctionComponentElement<P> extends JsxElement<P> {
 
 export class Component<P> {
   protected readonly props: P;
-  /** @internal */
-  // tslint:disable-next-line:variable-name
-  private readonly __isClass = Object.freeze({});
 
   constructor(props: P) {
     this.props = props;
   }
 }
+
+(Component.prototype as any).__isClass = Object.freeze({});
+Object.defineProperty(Component.prototype, "__isClass", {
+  configurable: false,
+  enumerable: false,
+  writable: false,
+});
+Object.freeze(Component.prototype);
 Object.freeze(Component);
 
 export const shouldConstruct = (componentType: any) => {
   const prototype = componentType.prototype;
-  return !!(prototype && prototype.__isClass);
+  return !!prototype && !!prototype.__isClass;
 };
 
 export const isFunctionComponent = (componentType: any) =>
@@ -114,9 +119,8 @@ export function evalElement<C extends ComponentElement<any>>(element: C): Instan
 export function evalElement(element: JsxElement<any>): any;
 export function evalElement(element: JsxElement<any>) {
   const propsTypeIsUndefined = typeof element.props === "undefined";
-  const elementType = typeof element.type;
-  const elementTypeIsString = elementType === "string";
-  const elementTypeIsFunction = elementType === "function";
+  const elementTypeIsString = typeof element.type === "string";
+  const elementTypeIsFunction = typeof element.type === "function";
   const elementTypeIsNeitherStringOrFunction =
     !elementTypeIsString && !elementTypeIsFunction;
 
@@ -133,8 +137,7 @@ export function evalElement(element: JsxElement<any>) {
   }
 
   // Function component
-  if (isFunctionComponent(elementType)) {
-    // Functional component
+  if (isFunctionComponent(element.type)) {
     const result = (element.type as any)(element.props);
     return evalElement(result);
   }
