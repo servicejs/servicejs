@@ -105,7 +105,7 @@ export const updateMenuItems = <MenuItemIds extends string>(
  *
  * @param handlerMap A map with events / actions to dispatch, indexed by the IDs of the action
  */
-export const dispatch = <ActionIds extends string | number | symbol>(
+export const dispatchActionById = <ActionIds extends string | number | symbol>(
   handlerMap: {
     [Id in ActionIds]?: (() => void) | ((id: Id) => void) | undefined
   },
