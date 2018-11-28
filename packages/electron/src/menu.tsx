@@ -1,20 +1,23 @@
 /* @jsx h */
 
-import { h } from "@service/jsx";
+import { Component, h } from "@service/jsx";
 import { MenuItemConstructorOptions } from "electron";
 
 export interface MenuItemProps extends MenuItemConstructorOptions {
   children?: MenuItemConstructorOptions[] | MenuItemProps[];
 }
 
-export const Menu = ({ children }: Pick<MenuItemProps, "children">): MenuItemConstructorOptions[] => children as any[];
+export class Menu extends Component<Pick<MenuItemProps, "children">> {
+  public props: Pick<MenuItemProps, "children">;
+}
 
-export const MenuItem = ({ children, ...props }: MenuItemProps): MenuItemConstructorOptions => ({
-  submenu: children,
-  ...props,
-});
-
-export const Separator = () => <MenuItem type="separator" />;
+// tslint:disable-next-line:max-classes-per-file
+export class MenuItem extends Component<MenuItemProps> {
+  public props: MenuItemProps;
+  constructor(props: MenuItemProps) {
+    super(props);
+  }
+}
 
 export const SubMenu = ({
   children = [],
