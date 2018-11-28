@@ -1,9 +1,8 @@
-import {
-  BrowserWindow,
-  ipcMain,
-  ipcRenderer,
-  MenuItemConstructorOptions,
-} from "electron";
+/**
+ * Generic IPC protocol helpers
+ */
+
+import { BrowserWindow, ipcMain, ipcRenderer } from "electron";
 
 export type IpcListenFunction<T> = (args: T) => void;
 export type IpcEmitFunction<T> = (args: T) => void;
@@ -99,49 +98,3 @@ export const listenToChannelsInMain = <ChannelArgMap>(
 export const listenToChannelsInRenderer = <ChannelArgMap>(
   listenerMap: IpcListenerMap<ChannelArgMap>,
 ) => listenToChannels(listenerMap, listenToIpcMessageInRenderer);
-
-/**
- * MenuItem IPC Protocol
- */
-// tslint:disable-next-line:no-namespace
-export namespace MenuItemIpcProtocol {
-  interface MainListenerArgMap<MenuItemIds extends string> {
-    updateMenuItems: {
-      [id in MenuItemIds]?: Partial<MenuItemConstructorOptions>
-    };
-  }
-
-  interface RendereristenerArgMap<MenuItemIds extends string> {
-    menuItemClick: MenuItemIds;
-  }
-
-  export namespace Main {
-    export interface ListenerArgMap<MenuItemIds extends string>
-      extends MainListenerArgMap<MenuItemIds> {}
-    export interface EmitterArgMap<MenuItemIds extends string>
-      extends RendereristenerArgMap<MenuItemIds> {}
-
-    export const listen = <MenuItemIds extends string>(
-      listenerMap: IpcListenerMap<ListenerArgMap<MenuItemIds>>,
-    ) => listenToChannelsInMain<ListenerArgMap<MenuItemIds>>(listenerMap);
-    export const Emitter = <MenuItemIds extends string>(
-      browserWindow: () => BrowserWindow,
-    ) =>
-      MainIpcEmitter<EmitterArgMap<MenuItemIds>>(browserWindow, [
-        "menuItemClick",
-      ]);
-  }
-
-  export namespace Renderer {
-    export interface ListenerArgMap<MenuItemIds extends string>
-      extends RendereristenerArgMap<MenuItemIds> {}
-    export interface EmitterArgMap<MenuItemIds extends string>
-      extends MainListenerArgMap<MenuItemIds> {}
-
-    export const listen = <MenuItemIds extends string>(
-      listenerMap: IpcListenerMap<ListenerArgMap<MenuItemIds>>,
-    ) => listenToChannelsInRenderer<ListenerArgMap<MenuItemIds>>(listenerMap);
-    export const Emitter = <MenuItemIds extends string>() =>
-      RendererIpcEmitter<EmitterArgMap<MenuItemIds>>(["updateMenuItems"]);
-  }
-}

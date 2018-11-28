@@ -27,7 +27,7 @@ export const SubMenu = ({
 
 export const Separator = () => <MenuItem type="separator" />;
 
-export type ClickMenuItemProps = Pick<MenuItemProps, "enabled" | "accelerator" | "label"> &
+export type ClickMenuItemProps = Pick<MenuItemProps, "enabled" | "accelerator" | "label" | "visible"> &
   Required<Pick<MenuItemProps, "id">>;
 
 export const ClickMenuItemFactory = (emitter: (id: string) => void) => (props: ClickMenuItemProps) => (
