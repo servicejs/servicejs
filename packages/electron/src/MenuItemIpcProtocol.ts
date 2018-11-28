@@ -4,7 +4,7 @@
 
 /** Imports */
 
-import { BrowserWindow, MenuItem, MenuItemConstructorOptions } from "electron";
+import { BrowserWindow, MenuItem } from "electron";
 import {
   IpcListenerMap,
   listenToChannelsInMain,
@@ -14,12 +14,20 @@ import {
 } from "./ipc";
 import { getMenuItemById } from "./menu";
 
+export type MaybeMap<T> = { [K in keyof T]: T[K] | undefined };
+export type MaybePartialMap<T> = Partial<MaybeMap<T>>;
+export type MenuItemUpdateProps = MaybePartialMap<
+  Pick<MenuItem, "checked" | "click" | "enabled" | "label" | "visible">
+>;
+export type KeyedMap<K extends string | number | symbol, T> = { [key in K]: T };
+export type MenuItemOptionMap<MenuItemIds extends string> = MaybePartialMap<
+  KeyedMap<MenuItemIds, MenuItemUpdateProps>
+>;
+
 // tslint:disable-next-line:no-namespace
 export namespace MenuItemIpcProtocol {
   interface MainListenerArgMap<MenuItemIds extends string> {
-    updateMenuItems: {
-      [id in MenuItemIds]?: Partial<MenuItemConstructorOptions>
-    };
+    updateMenuItems: { [id in MenuItemIds]?: Partial<MenuItemUpdateProps> };
   }
 
   interface RendereristenerArgMap<MenuItemIds extends string> {
@@ -56,16 +64,6 @@ export namespace MenuItemIpcProtocol {
       RendererIpcEmitter<EmitterArgMap<MenuItemIds>>(["updateMenuItems"]);
   }
 }
-
-export type MaybeMap<T> = { [K in keyof T]: T[K] | undefined };
-export type MaybePartialMap<T> = Partial<MaybeMap<T>>;
-export type MenuItemUpdateProps = MaybePartialMap<
-  Pick<MenuItem, "checked" | "click" | "enabled" | "label" | "visible">
->;
-export type KeyedMap<K extends string | number | symbol, T> = { [key in K]: T };
-export type MenuItemOptionMap<MenuItemIds extends string> = MaybePartialMap<
-  KeyedMap<MenuItemIds, MenuItemUpdateProps>
->;
 
 export const updateMenuItems = <MenuItemIds extends string>(
   menuItemOptionMap: MenuItemOptionMap<MenuItemIds>,
