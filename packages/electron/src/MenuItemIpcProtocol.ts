@@ -97,3 +97,28 @@ export const updateMenuItems = <MenuItemIds extends string>(
     }
   }
 };
+
+/**
+ * Creates a handler function that accepts an ID and dispatches the
+ * corresponding action from the supplied map of handlers. If an ID does not
+ * have a handler, nothing happens.
+ *
+ * @param handlerMap A map with events / actions to dispatch, indexed by the IDs of the action
+ */
+export const dispatch = <ActionIds extends string | number | symbol>(
+  handlerMap: {
+    [Id in ActionIds]?: (() => void) | ((id: Id) => void) | undefined
+  },
+) => <Id extends ActionIds>(id: Id) => {
+  // tslint:disable-next-line:no-console
+  console.log(id);
+  const handler = handlerMap[id];
+
+  // If no handler corrsponding to the ID exists, do nothing
+  if (!handler) {
+    return;
+  }
+
+  // If found, run the handler
+  (handler as (id: Id) => void)(id);
+};
