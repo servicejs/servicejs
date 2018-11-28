@@ -1,6 +1,6 @@
 {
   "name": "@service/electron",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "service.js electron library",
   "author": "Automorph Ltd (https://www.automorph.com)",
   "license": "MIT",
@@ -76,7 +76,7 @@
   "dependencies": {
     "@service/browser": "^0.1.5",
     "@service/core": "^0.1.9",
-    "@service/jsx": "^0.1.6",
+    "@service/jsx": "^0.1.7",
     "@service/node": "^0.1.1",
     "electron": "^3.0.10"
   }
