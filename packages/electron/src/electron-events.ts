@@ -14,8 +14,12 @@ import {
   Session,
   WebContents,
 } from "electron";
-import { PartialMaybeMap } from "./util";
 
+import { MaybeMap } from "./util";
+
+/**
+ * An enum of all electron global app events
+ */
 export enum ElectronEvent {
   AccessibilitySupportChanged = "accessibility-support-changed",
   Activate = "activate",
@@ -306,7 +310,7 @@ export type ListenerMap<EventArgMap> = {
 };
 
 export const listenToElectronEvents = (
-  listenerMap: PartialMaybeMap<ListenerMap<ElectronEventArgMap>>,
+  listenerMap: MaybeMap<ListenerMap<ElectronEventArgMap>>,
 ) => {
   app.on(
     ElectronEvent.AccessibilitySupportChanged,
@@ -424,7 +428,13 @@ export const listenToElectronEvents = (
     ) => {
       const handler = listenerMap[ElectronEvent.Login];
       if (handler) {
-        handler({ authInfo, callback, event, request, webContents });
+        handler({
+          authInfo,
+          callback,
+          event,
+          request,
+          webContents,
+        });
       }
     },
   );
@@ -478,7 +488,13 @@ export const listenToElectronEvents = (
     ) => {
       const handler = listenerMap[ElectronEvent.SelectClientCertificate];
       if (handler) {
-        handler({ event, webContents, url, certificateList, callback });
+        handler({
+          event,
+          webContents,
+          url,
+          certificateList,
+          callback,
+        });
       }
     },
   );

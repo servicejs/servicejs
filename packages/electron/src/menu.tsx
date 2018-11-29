@@ -8,15 +8,15 @@
 
 import { h, Props } from "@service/jsx";
 import { Menu as ElectronMenu, MenuItem as ElectronMenuItem, MenuItemConstructorOptions } from "electron";
-import { KeyedMap, PartialMaybeMap } from "./util";
+import { MaybeMap } from "./util";
 
 //
 // Types
 //
 
 export type MenuItemOptions = Pick<ElectronMenuItem, "checked" | "click" | "enabled" | "label" | "visible">;
-export type MenuItemUpdateProps = PartialMaybeMap<MenuItemOptions>;
-export type MenuItemOptionMap<MenuItemIds extends string> = PartialMaybeMap<KeyedMap<MenuItemIds, MenuItemUpdateProps>>;
+export type MenuItemUpdateProps = MaybeMap<MenuItemOptions>;
+export type MenuItemOptionMap<MenuItemIds extends string> = MaybeMap<Record<MenuItemIds, MenuItemUpdateProps>>;
 
 //
 // Menu

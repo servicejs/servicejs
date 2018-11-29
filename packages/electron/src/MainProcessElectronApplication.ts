@@ -14,7 +14,7 @@ import {
   ListenerMap,
   listenToElectronEvents,
 } from "./electron-events";
-import { PartialMaybeMap } from "./util";
+import { MaybeMap } from "./util";
 
 export interface MainProcessElectronApplicationProps {
   development?: boolean;
@@ -35,9 +35,7 @@ export abstract class MainProcessElectronApplication<
     mainWindow: {},
   };
 
-  protected onElectronEvent: PartialMaybeMap<
-    ListenerMap<ElectronEventArgMap>
-  > = {
+  protected onElectronEvent: MaybeMap<ListenerMap<ElectronEventArgMap>> = {
     "activate": () => {
       // on macOS it is common to re-create a window even after all windows have been closed
       this.mainWindow();
