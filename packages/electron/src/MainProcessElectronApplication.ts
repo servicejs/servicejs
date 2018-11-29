@@ -9,6 +9,12 @@ import { NodeApplication } from "@service/node";
 import { app, BrowserWindow, BrowserWindowConstructorOptions } from "electron";
 import * as path from "path";
 import { format as formatUrl } from "url";
+import {
+  ElectronEventArgMap,
+  ListenerMap,
+  listenToElectronEvents,
+} from "./electron-events";
+import { PartialMaybeMap } from "./util";
 
 export interface MainProcessElectronApplicationProps {
   development?: boolean;
@@ -28,6 +34,27 @@ export abstract class MainProcessElectronApplication<
     development: process.env.NODE_ENV !== "production",
     mainWindow: {},
   };
+
+  protected onElectronEvent: PartialMaybeMap<
+    ListenerMap<ElectronEventArgMap>
+  > = {
+    "activate": () => {
+      // on macOS it is common to re-create a window even after all windows have been closed
+      this.mainWindow();
+    },
+    "ready": () => {
+      this.createMainWindow();
+      this.displayMenu();
+    },
+    // quit application when all windows are closed
+    "window-all-closed": () => {
+      // on macOS it is common for applications to stay open until the user explicitly quits
+      if (process.platform !== "darwin") {
+        app.quit();
+      }
+    },
+  };
+
   constructor(props: P) {
     super({
       ...MainProcessElectronApplication.defaultProps,
@@ -43,23 +70,8 @@ export abstract class MainProcessElectronApplication<
       app.setName(this.props.name);
     }
 
-    // quit application when all windows are closed
-    app.on("window-all-closed", () => {
-      // on macOS it is common for applications to stay open until the user explicitly quits
-      if (process.platform !== "darwin") {
-        app.quit();
-      }
-    });
-
-    app.on("activate", () => {
-      // on macOS it is common to re-create a window even after all windows have been closed
-      this.mainWindow();
-    });
-
-    app.on("ready", () => {
-      this.createMainWindow();
-      this.displayMenu();
-    });
+    // Register Electron event listeners
+    listenToElectronEvents(this.onElectronEvent);
   }
 
   protected hasMainWindow() {
