@@ -6,13 +6,7 @@
 
 import { ApplicationState } from "@service/core";
 import { NodeApplication } from "@service/node";
-import {
-  app,
-  BrowserWindow,
-  BrowserWindowConstructorOptions,
-  Menu,
-  MenuItemConstructorOptions,
-} from "electron";
+import { app, BrowserWindow, BrowserWindowConstructorOptions } from "electron";
 import * as path from "path";
 import { format as formatUrl } from "url";
 
@@ -64,8 +58,7 @@ export abstract class MainProcessElectronApplication<
 
     app.on("ready", () => {
       this.createMainWindow();
-      const menu = Menu.buildFromTemplate(this.menu());
-      Menu.setApplicationMenu(menu);
+      this.displayMenu();
     });
   }
 
@@ -126,5 +119,5 @@ export abstract class MainProcessElectronApplication<
     } as S;
   }
 
-  protected abstract menu(): MenuItemConstructorOptions[];
+  protected abstract displayMenu(): void;
 }
