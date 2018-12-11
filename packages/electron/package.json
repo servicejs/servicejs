@@ -76,7 +76,7 @@
   "dependencies": {
     "@service/browser": "^0.1.5",
     "@service/core": "^0.1.9",
-    "@service/jsx": "^0.1.8",
+    "@service/jsx": "^0.1.9",
     "@service/node": "^0.1.1",
     "electron": "^3.0.10"
   }
