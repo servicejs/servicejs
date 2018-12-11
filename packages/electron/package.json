@@ -1,6 +1,6 @@
 {
   "name": "@service/electron",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "service.js electron library",
   "author": "Automorph Ltd (https://www.automorph.com)",
   "license": "MIT",
