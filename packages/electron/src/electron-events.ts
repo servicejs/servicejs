@@ -488,13 +488,7 @@ export const listenToElectronEvents = (
     ) => {
       const handler = listenerMap[ElectronEvent.SelectClientCertificate];
       if (handler) {
-        handler({
-          event,
-          webContents,
-          url,
-          certificateList,
-          callback,
-        });
+        handler({ event, url, webContents, certificateList, callback });
       }
     },
   );

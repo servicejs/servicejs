@@ -80,7 +80,7 @@ export const isFunctionComponent = (componentType: any) =>
 
 /** A component class is a class / a function you can with new that returns a ElementClass value */
 export interface ComponentClass<P> {
-  new (props: P): Component<P> & InstanceType<this>;
+  new (props: P): Component<P>;
 }
 
 export type ComponentClassPropsType<
