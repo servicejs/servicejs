@@ -7,6 +7,7 @@
 import { ApplicationState } from "@service/core";
 import { NodeApplication } from "@service/node";
 import { app, BrowserWindow, BrowserWindowConstructorOptions } from "electron";
+import { existsSync } from "fs";
 import * as path from "path";
 import { format as formatUrl } from "url";
 import {
@@ -97,9 +98,30 @@ export abstract class MainProcessElectronApplication<
         `http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`,
       );
     } else {
+      // Depending on the build target, the index.html file can be in different locations,
+      // but always (?) in the current or in a parent directory of this file
+      let currentDir = __dirname;
+      let currentFile = path.normalize(path.join(currentDir, "index.html"));
+      let found = false;
+      while (!found) {
+        if (existsSync(currentFile)) {
+          found = true;
+          break;
+        }
+        const oldDir = currentDir;
+        currentDir = path.normalize(path.join(currentDir, ".."));
+        currentFile = path.normalize(path.join(currentDir, "index.html"));
+        if (oldDir === currentDir) {
+          break;
+        }
+      }
+      if (!found) {
+        process.exit(1);
+      }
+
       window.loadURL(
         formatUrl({
-          pathname: path.join(__dirname, "index.html"),
+          pathname: currentFile,
           protocol: "file",
           slashes: true,
         }),
