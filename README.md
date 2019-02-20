@@ -14,6 +14,17 @@ To install all dependencies at the root level, run `yarn install`, then you can 
 
 There is a small helper script that will create a new package in the `packages` directory (if such a package does not yet exist). Run `yarn run bootstrap-new-package <PACKAGE_NAME>` and this will create the directory `packages/<PACKAGE_NAME>` and add all important core files. The package will be named `@service/<PACKAGE_NAME>`.
 
+## Thank you
+
+service.js is kindly supported by:
+
+<a href="https://www.browserstack.com" title="BrowserStack">
+  <picture>
+    <source srcset="./media/browserstack/Browserstack-logo.svg" type="image/svg+xml">
+    <img src="./media/browserstack/Browserstack-logo@2x.png" alt="Browserstack">
+  </picture>
+</a>
+
 ## License: MIT
 
 See [./LICENSE](./LICENSE).
