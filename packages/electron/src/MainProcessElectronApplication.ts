@@ -27,7 +27,7 @@ export interface MainProcessElectronApplicationState extends ApplicationState {
   mainWindow: BrowserWindow | null;
 }
 
-export abstract class MainProcessElectronApplication<
+export class MainProcessElectronApplication<
   P extends MainProcessElectronApplicationProps = MainProcessElectronApplicationProps,
   S extends MainProcessElectronApplicationState = MainProcessElectronApplicationState
 > extends NodeApplication<P, S> {
@@ -37,11 +37,11 @@ export abstract class MainProcessElectronApplication<
   };
 
   protected onElectronEvent: MaybeMap<ListenerMap<ElectronEventArgMap>> = {
-    "activate": () => {
+    activate: () => {
       // on macOS it is common to re-create a window even after all windows have been closed
       this.mainWindow();
     },
-    "ready": () => {
+    ready: () => {
       this.createMainWindow();
       this.displayMenu();
     },
@@ -151,5 +151,9 @@ export abstract class MainProcessElectronApplication<
     } as S;
   }
 
-  protected abstract displayMenu(): void;
+  protected displayMenu(): void {
+    // Menu.setApplicationMenu(Menu.buildFromTemplate([]));
+  }
+
+  protected async main() {}
 }
