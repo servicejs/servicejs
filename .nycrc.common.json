@@ -1,0 +1,20 @@
+{
+  "extends": "@istanbuljs/nyc-config-typescript",
+  "all": true,
+  "branches": 99,
+  "check-coverage": true,
+  "extension": [".ts", ".tsx"],
+  "functions": 99,
+  "instrument": true,
+  "lines": 99,
+  "per-file": true,
+  "reporter": ["lcov", "text-summary", "json"],
+  "sourceMap": true,
+  "statements": 99,
+  "watermarks": {
+    "lines": [80, 95],
+    "functions": [80, 95],
+    "branches": [80, 95],
+    "statements": [80, 95]
+  }
+}

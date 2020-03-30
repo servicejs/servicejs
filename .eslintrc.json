@@ -1,0 +1,70 @@
+{
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly",
+    "__GLOBALS__": "readonly"
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "sort-imports-es6-autofix", "prettier"],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/semi": ["error", "always"],
+    "arrow-body-style": [2, "as-needed"],
+    "arrow-parens": [2, "as-needed"],
+    "camelcase": 2,
+    "comma-dangle": [2, "always-multiline"],
+    "eol-last": 2,
+    "eqeqeq": [2, "smart"],
+    "linebreak-style": ["error", "unix"],
+    "no-case-declarations": "warn",
+    "no-cond-assign": 1,
+    "no-console": "warn",
+    "no-debugger": 2,
+    "no-empty": 1,
+    "no-eval": 2,
+    "no-extra-semi": "error",
+    "no-fallthrough": 2,
+    "no-multiple-empty-lines": 2,
+    "no-throw-literal": 2,
+    "no-trailing-spaces": 2,
+    "no-undef-init": 2,
+    "no-unused-vars": "off",
+    "no-useless-escape": 0,
+    "no-var": 2,
+    "object-curly-spacing": [2, "always"],
+    "object-shorthand": 2,
+    "prefer-const": 2,
+    "prefer-object-spread": 2,
+    "quotes": [
+      "error",
+      "single",
+      {
+        "avoidEscape": true,
+        "allowTemplateLiterals": true
+      }
+    ],
+    "quote-props": [2, "consistent-as-needed"],
+    // note you must disable the base rule as it can report incorrect errors
+    "semi": "off",
+    "sort-imports-es6-autofix/sort-imports-es6": [
+      2,
+      {
+        "ignoreCase": true
+      }
+    ]
+  }
+}

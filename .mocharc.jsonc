@@ -1,0 +1,13 @@
+{
+  "diff": true,
+  "extension": ["ts", "tsx"],
+  "package": "./package.json",
+  "reporter": "spec",
+  "require": ["ts-node/register"],
+  "slow": 75,
+  "spec": "**/*.spec.?(ts|tsx)",
+  "timeout": 2000,
+  "ui": "bdd",
+  "watch-files": "**/*.?(ts|tsx)",
+  "watch-ignore": []
+}
