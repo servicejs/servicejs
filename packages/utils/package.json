@@ -1,0 +1,30 @@
+{
+  "name": "@service/utils",
+  "version": "1.0.0",
+  "author": {
+    "email": "npm@gfm.io",
+    "name": "Frédérique Mittelstaedt",
+    "url": "https://www.gfm.io"
+  },
+  "license": "MIT",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "tsc": "tsc",
+    "tsc:w": "tsc",
+    "build": "npm-run-all clean:dist tsc",
+    "dev": "npm-run-all clean:dist tsc:w",
+    "lint": "eslint './src/**/*.?(js|jsx|ts|tsx)'",
+    "lint:fix": "eslint './src/**/*.?(js|jsx|ts|tsx)' --fix",
+    "clean:dist": "rimraf ./dist",
+    "clean:coverage": "rimraf ./.nyc_output ./coverage",
+    "pretest": "npm-run-all clean:coverage",
+    "test": "npm-run-all lint test:coverage",
+    "test:unit": "cross-env NODE_ENV=test TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\", \"target\":\"es6\"}' mocha",
+    "test:coverage": "cross-env NODE_ENV=test TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\", \"target\":\"es6\"}' nyc mocha"
+  },
+  "dependencies": {
+    "ts-error": "^1.0.4"
+  }
+}
