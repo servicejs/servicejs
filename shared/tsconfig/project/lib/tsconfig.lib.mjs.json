@@ -1,7 +1,0 @@
-{
-  "compilerOptions": {
-    "composite": true
-  },
-  "files": [],
-  "references": [{ "path": "shared/tsconfig/lib/tsconfig.lib.mjs.json" }]
-}
