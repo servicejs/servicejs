@@ -25,6 +25,7 @@
     "test:coverage": "cross-env NODE_ENV=test TS_NODE_COMPILER_OPTIONS='{\"module\":\"commonjs\", \"target\":\"es6\"}' nyc mocha"
   },
   "dependencies": {
+    "@service/types": "^1.0.0",
     "ts-error": "^1.0.4"
   }
 }
