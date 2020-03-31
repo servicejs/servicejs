@@ -1,0 +1,5 @@
+{
+  "extends": "../../.nycrc.common.json",
+  "exclude": "src/**/*.spec.?(ts|tsx)",
+  "include": "src/**/*.?(ts|tsx)"
+}
