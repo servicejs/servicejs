@@ -3,28 +3,28 @@ import * as sinon from 'sinon';
 import { describe, it } from 'mocha';
 import { expect } from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import createServiceProxy from './createServiceProxy';
+import createServiceClientProxy from './createServiceClientProxy';
 
 chai.use(chaiAsPromised);
 
-interface TestType {
-  field(a: string, b: string, c: string): void;
+interface TestController {
+  add(a: number, b: number): number;
 }
 
-describe('createServiceProxy()', () => {
+describe('createServiceClientProxy()', () => {
   const handler = sinon.fake();
 
-  const serviceProxy = createServiceProxy<TestType>(handler);
+  const serviceProxy = createServiceClientProxy<TestController>(handler);
   it('returns a (Proxy) object', () => expect(typeof serviceProxy === 'object').to.equal(true));
   it('calls the handler when any field is called', () =>
     expect(
       (async () => {
-        await serviceProxy.field('a', 'b', 'c');
-        return handler.calledOnceWith('field', ['a', 'b', 'c']);
+        await serviceProxy.add(1, 2);
+        return handler.calledOnceWith('add', [1, 2]);
       })(),
     ).to.eventually.equal(true));
   it('throws an UnsupportedActionException when trying to set a property', () =>
     expect(() => {
-      serviceProxy.field = async (a: string, b: string, c: string) => {};
+      serviceProxy.add = async (a: number, b: number) => a + b;
     }).to.throw());
 });
