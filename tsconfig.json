@@ -8,8 +8,8 @@
 
     // Source maps & declarations
     "sourceMap": true,
-    "declaration": false,
-    // "declarationMap": true,
+    "declaration": true,
+    "declarationMap": true,
 
     // Module resolution
     "moduleResolution": "node",
@@ -75,6 +75,14 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "preserveConstEnums": false
-  }
-  // "exclude": ["old/**/*", "dist/**/*", "out/**/*"]
+  },
+  "include": [],
+  "references": [
+    { "path": "./packages/application/tsconfig.json" },
+    { "path": "./packages/core/tsconfig.json" },
+    { "path": "./packages/local/tsconfig.json" },
+    { "path": "./packages/node-worker/tsconfig.json" },
+    { "path": "./packages/types/tsconfig.json" },
+    { "path": "./packages/utils/tsconfig.json" }
+  ]
 }

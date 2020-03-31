@@ -10,6 +10,7 @@
   "private": true,
   "scripts": {
     "w": "./scripts/w.sh",
+    "dev": "tsc -b -w",
     "lint": "eslint './**/*.?(js|jsx|ts|tsx)'",
     "lint:fix": "eslint './**/*.(j|t)s?(x)' --fix",
     "test": "npm-run-all clean test:lint test:coverage",
